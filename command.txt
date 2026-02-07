@@ -1,0 +1,31 @@
+ 193  cd documents
+  194  ls
+  195  ls -al
+  196  mkdir NIBATOJR
+  197  cd NIBATOJR
+  198  ls
+  199  git config --global user.name "jrnibs"
+  200  git config --global user.name
+  201  git config --global user.email "johnnibato13@gmail.com"
+  202  git config --global user.email
+  203  git init
+  204  ls -al
+  205  touch readme.md
+  206  ls
+  207  start readme.md
+  208  git add .
+  209  git status
+  210  git status
+  211  git add .
+  212  git status
+  213  git commit -M "adding readme"
+  214  git commit -m "adding readme"
+  215  git branch -M main
+  216  git remote add origin https://github.com/IT222-CHARLES/NIBATOJR.git
+  217  git push -u origin main
+  218  history
+
+  git rebase branchname
+  git push // pusg data on github online
+  git pull // pull the data on github
+  git checkout branchname // to switch workplace
