@@ -8,6 +8,8 @@
 <body>
     <?php include 'header.php'; ?>
 
+    
+    <h1><?php writemsg(); ?></h1>
     <h1><?php echo $Welcome1; ?></h1>
     <p><?php echo $course ." / ". $subject ;?></p>
     <p><?php echo $number; ?></p>
