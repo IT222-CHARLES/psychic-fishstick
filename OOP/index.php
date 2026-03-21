@@ -11,7 +11,11 @@
     $account3 = new Account("333");
     $account4 = new Account("333");
 
-    $account = new BankAccount();
+    $saveAccount = new SavingAccount(1000, 3.5); 
+    echo $saveAccount->addInterest();
+    echo $saveAccount->getBalance();
+    
+    $account = new BankAccount(100);
     // $account->setAccountnumber('123');
     // $account->balance = "100";
 
@@ -19,6 +23,7 @@
     // $account->deposit(50);
     // $account->withdraw(250);
     // $account->deposit(150);
+    //var_dump($account->balance);
     $account->transaction(200,'deposit');
     $account->transaction(50,'withdraw');
 

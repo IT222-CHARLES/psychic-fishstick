@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 class Account{
     private $accountNumber;
@@ -18,7 +19,11 @@ class Account{
 }
 class BankAccount{
     
-    private $balance;
+    public float $balance = 0;
+
+    public function __construct(float $balance = 0){
+        $this->balance = $balance;
+    }
 
     public function getBalance(){
         return $this->balance;
@@ -88,4 +93,27 @@ class Bank{
     public function removeCustomer(){
 
     }
+}
+
+class SavingAccount extends BankAccount{
+    public $interestRate;
+
+    public function __construct($balance, $interestRate){
+        parent::__construct($balance);
+        $this->interestRate = $interestRate;
+    }
+
+    public function getInterestRate(){
+        return $this->interestRate;
+    }
+
+    public function setInterestRate($interestRate){
+        $this->interestRate = $interestRate;
+    }
+
+    public function addInterest(){
+        $interest = $this->getBalance() * $this->interestRate;
+        $this->deposit($interest);
+    }
+    
 }
