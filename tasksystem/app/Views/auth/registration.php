@@ -4,7 +4,7 @@
                 <div class="col-md-3">
                     <div class="card card-shadow" >
                         <div class="card-body text-center">
-                            <form action="<?= $config['app_url'] ?>/auth/authenticate" method="post">
+                            <form action="<?= $config['app_url'] ?>/auth/registration" method="post">
                                 <h1 class="h3 mb-3 fw-normal">Registration</h1>
                                 <div class="py-2">
                                     <div class="form-floating">
