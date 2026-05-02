@@ -1,4 +1,20 @@
-<div class="container-fluid bg-secondary-subtle">
+<?php $config = require __DIR__ . '/../../Config/config.php'; ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <script src="<?= $config['app_url'] ?>/assets/js/sweetalert2.all.min.js"></script>
+    <script src="<?= $config['app_url'] ?>/assets/js/AlertService.js"></script>
+     <link rel="stylesheet" href="<?= $config['app_url'] ?>/assets/css/style.css">
+    <link rel="stylesheet" href="<?= $config['app_url'] ?>/assets/css/bootstrap.min.css">
+    <script src="<?= $config['app_url'] ?>/assets/js/bootstrap.min.js"></script>
+</head>
+<body>
+    
+    <div class="container-fluid bg-secondary-subtle">
+        <img src="<?= $config['app_url'] ?>/assets/images/oc.png" class="bglogo" alt="Background Logo">
         <div class="vh-100">
             <div class="row align-items-center justify-content-center h-100">
                 <div class="col-md-3">
@@ -17,7 +33,7 @@
                                     <label for="floatingPassword">Password</label>
                                 </div>
                                 <button class="btn btn-primary w-100 py-2 my-2 " type="submit" name="submit">Sign in</button>
-                                <p class="mt-3">Don't have an account? <a href="<?= $config['app_url'] ?>/register">Sign up</a></p>
+                                <p class="mt-3">Don't have an account? <a href="<?= $config['app_url'] ?>/registration">Sign up</a></p>
                             </form>
                         </div>
                     </div>
@@ -26,3 +42,6 @@
             </div>
         </div>
     </div>
+
+</body>
+</html>

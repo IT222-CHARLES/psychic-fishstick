@@ -48,6 +48,25 @@ abstract class Model
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
+    protected function findWhere(array $conditions): array
+    {
+        $where = implode(' AND ', array_map(fn($col) => "{$col} = ?", array_keys($conditions)));
+        $sql = "SELECT * FROM {$this->table} WHERE {$where}";
+        $stmt = $this->db->prepare($sql);
+
+        // Bind parameters
+        $types = '';
+        $values = [];
+        foreach ($conditions as $value) {
+            $types .= is_int($value) ? 'i' : 's';
+            $values[] = $value;
+        }
+        $stmt->bind_param($types, ...$values);
+
+        $stmt->execute();
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+
     public function countAll(): int
     {
         $result = $this->db->query("SELECT COUNT(*) as cnt FROM {$this->table}");

@@ -1,10 +1,26 @@
 <?php
 
-Class User extends Model
+class User extends Model
 {
-    protected $table = 'tbl_users';
+    protected $table = 'tbl_user';
 
-     public function findByUsername(string $username)
+    /**
+     * Find user by ID
+     */
+    public function findById(int $id)
+    {
+        return $this->find($id);
+    }
+
+    public function countAll(): int
+    {
+        return parent::countAll();
+    }
+
+    /**
+     * Find user by username
+     */
+    public function findByUsername(string $username)
     {
         $stmt = $this->db->prepare(
             "SELECT id, username, password, name, role, created_at 
@@ -42,4 +58,28 @@ Class User extends Model
         }
         return null;
     }
+
+    public function getAllUser(): array
+    {
+        return $this->all();
+    }
+
+    public function getById($id): ?array
+    {
+        return $this->findById($id);
+    }
+
+    // Update user by ID
+    public function updateUser(int $id, array $data): bool
+    {
+        return $this->update($id, $data); // uses Model::update
+    }
+
+    // Delete user by ID
+    public function deleteUser(int $id): bool
+    {
+        return $this->delete($id); // uses Model::delete
+    }
+
+
 }

@@ -1,49 +1,56 @@
 <?php
 require_once __DIR__ . '/../Core/Controller.php';
+require_once __DIR__ . '/../Core/Auth.php';
 require_once __DIR__ . '/../Core/Flash.php';
 
-Class AuthController extends Controller{
-
+class AuthController extends Controller
+{
     private User $userModel;
 
     public function __construct()
     {
+        // Load User model
         $this->userModel = $this->model('User');
+       
     }
-
-    public function registration(){
-
-        if($_SERVER['REQUEST_METHOD'] !== 'POST'){
+    public function handleRegister()
+    {
+        // Only allow POST
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             $this->redirect('/register');
         }
 
-        //intputs
-        $username = $_POST['username'] ?? '';
-        $email = $_POST['email'] ?? '';
-        $name = $_POST['name'] ?? '';
-        $password = $_POST['password'] ?? '';
+        // Sanitize inputs
+        $username = trim($_POST['username'] ?? '');
+        $name = trim($_POST['name'] ?? '');
+        $password = trim($_POST['password'] ?? '');
+        $email = trim($_POST['email'] ?? '');
 
-        if($username === '' || $email === '' || $name === '' || $password === ''){
+        // Validate inputs
+        if ($username === '' || $name === '' || $password === '' || $email === '') {
             Flash::set('error', 'All fields are required');
             $this->redirect('/register');
         }
 
+        // Create new user (default role: user)
         $this->userModel->create([
             'username' => $username,
-            'email' => $email,
-            'name' => $name,
+            'name'     => $name,
+            'role'     => 'user',
             'password' => $password,
-            'active' => 1,
-            'created_at' => date('Y-m-d H:i:s'),
-            'role' => 'user'
+            'email'    => $email,
+            'active'   => 1,
+            'created_at' => date('Y-m-d H:i:s')
         ]);
 
         Flash::set('success', 'Registration successful. Please log in.');
         $this->redirect('/login');
-
     }
 
-      public function authenticate()
+    /**
+     * Handle login form submission
+     */
+    public function authenticate()
     {
         // Only allow POST
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -86,5 +93,14 @@ Class AuthController extends Controller{
         exit;
     }
 
+    /**
+     * Logout
+     */
+    public function logout()
+    {
+        Auth::logout();
+        Flash::set('success', 'You have been logged out');
+        $this->redirect('/login');
+    }
 
 }
